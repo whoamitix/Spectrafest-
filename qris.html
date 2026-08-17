@@ -9,7 +9,6 @@
 <title>Pembayaran QRIS | DewaTiket.id</title>
 
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎫</text></svg>">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
@@ -42,44 +41,38 @@
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 
 body{
-    font-family:'Plus Jakarta Sans',-apple-system,sans-serif;
-    background:var(--bg-primary);
-    color:var(--text-primary);
-    min-height:100vh;
-    padding-bottom:calc(50px + var(--safe-bottom));
-    overflow-x:hidden;
-    position:relative;
-    -webkit-font-smoothing:antialiased;
-    opacity:0;
-    transition:opacity .5s ease;
+    font-family:'Plus Jakarta Sans',sans-serif;
+    background:var(--bg-primary);color:var(--text-primary);
+    min-height:100vh;padding-bottom:calc(50px + var(--safe-bottom));
+    overflow-x:hidden;position:relative;-webkit-font-smoothing:antialiased;
+    opacity:0;transition:opacity .5s ease;
 }
 
 body.loaded{opacity:1}
 body.no-scroll{overflow:hidden!important;position:fixed;width:100%;}
 
 body::before{
-    content:'';
-    position:fixed;
-    inset:0;
+    content:'';position:fixed;inset:0;z-index:-2;pointer-events:none;
+    background-image:url('background.jpg');
+    background-size:cover;background-position:center;opacity:0.15;
+}
+
+body::after{
+    content:'';position:fixed;inset:0;z-index:-2;pointer-events:none;
     background:
         radial-gradient(circle at 18% 12%,rgba(229,0,36,.12) 0%,transparent 38%),
-        radial-gradient(circle at 82% 78%,rgba(245,184,0,.08) 0%,transparent 40%);
-    z-index:-2;
-    pointer-events:none;
+        radial-gradient(circle at 82% 78%,rgba(245,184,0,.08) 0%,transparent 40%),
+        linear-gradient(180deg, rgba(10,10,15,.85), rgba(10,10,15,.95));
 }
 
 .header{
-    position:sticky;
-    top:0;
-    z-index:1000;
+    position:sticky;top:0;z-index:1000;
     height:calc(var(--header-h) + var(--safe-top));
     padding:var(--safe-top) 24px 0;
     background:rgba(10,10,15,.75);
     backdrop-filter:blur(24px) saturate(180%);
     -webkit-backdrop-filter:blur(24px) saturate(180%);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+    display:flex;align-items:center;justify-content:space-between;
     border-bottom:1px solid var(--border);
 }
 
@@ -87,36 +80,16 @@ body::before{
 .header-left{justify-content:flex-start}
 .header-right{justify-content:flex-end}
 
-.logo{
-    font-family:'Sora',sans-serif;
-    background:var(--gradient-gold);
-    -webkit-background-clip:text;
-    background-clip:text;
-    -webkit-text-fill-color:transparent;
-    font-size:22px;
-    font-weight:800;
-    letter-spacing:-.5px;
-    text-decoration:none;
-}
-.logo::after{content:'.';color:var(--accent-red);-webkit-text-fill-color:var(--accent-red)}
+.logo-img{height:32px;width:auto;display:block}
+.logo{text-decoration:none;display:flex;align-items:center}
 
 .icon-btn{
-    width:40px;
-    height:40px;
-    border:1px solid var(--border);
-    background:rgba(255,255,255,.03);
-    color:#fff;
-    border-radius:12px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    cursor:pointer;
-    transition:var(--transition);
-    -webkit-appearance:none;
-    appearance:none;
+    width:40px;height:40px;border:1px solid var(--border);
+    background:rgba(255,255,255,.03);color:#fff;border-radius:12px;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;transition:var(--transition);font-size:16px;
 }
 .icon-btn:hover{background:rgba(255,255,255,.08);border-color:var(--border-strong)}
-.icon-btn svg{width:20px;height:20px;stroke:currentColor}
 
 .container{width:100%;max-width:780px;margin:auto;padding:28px 20px 40px}
 
@@ -128,7 +101,8 @@ body::before{
 .step-num{
     width:24px;height:24px;background:rgba(255,255,255,.05);
     border:1px solid var(--border-strong);border-radius:50%;
-    display:flex;align-items:center;justify-content:center;font-size:12px;font-family:'Sora',sans-serif;
+    display:flex;align-items:center;justify-content:center;font-size:12px;
+    font-family:'Sora',sans-serif;
 }
 .step-item.active{color:var(--accent-gold)}
 .step-item.active .step-num{
@@ -139,19 +113,14 @@ body::before{
 
 .card{
     background:var(--gradient-card);
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
-    border:1px solid var(--border);
-    border-radius:var(--radius-lg);
-    padding:28px;margin-bottom:20px;
-    box-shadow:var(--shadow-card);
-    opacity:0;transform:translateY(20px);
-    animation:fadeUp .6s ease forwards;
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    border:1px solid var(--border);border-radius:var(--radius-lg);
+    padding:28px;margin-bottom:20px;box-shadow:var(--shadow-card);
+    opacity:0;transform:translateY(20px);animation:fadeUp .6s ease forwards;
 }
 .card:nth-child(2){animation-delay:.1s}
 .card:nth-child(3){animation-delay:.2s}
 .card:nth-child(4){animation-delay:.3s}
-
 @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
 
 .order-label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:6px}
@@ -164,7 +133,6 @@ body::before{
     background:rgba(255,255,255,.03);color:var(--accent-gold);border-radius:12px;
     cursor:pointer;font-size:13px;font-weight:600;transition:var(--transition);
     display:inline-flex;align-items:center;gap:8px;font-family:inherit;
-    -webkit-appearance:none;appearance:none;
 }
 .copy-amount-btn:hover{background:rgba(245,184,0,.08);border-color:rgba(245,184,0,.4)}
 
@@ -229,12 +197,10 @@ body::before{
     font-weight:800;font-size:16px;cursor:pointer;background:var(--gradient-red);
     color:#fff;transition:var(--transition);margin-top:20px;overflow:hidden;
     letter-spacing:1px;text-transform:uppercase;position:relative;font-family:'Sora',sans-serif;
-    -webkit-appearance:none;appearance:none;
 }
 .submit-btn:hover:not(:disabled){box-shadow:0 10px 30px rgba(229,0,36,.4);transform:translateY(-2px)}
 .submit-btn:disabled{opacity:.4;cursor:not-allowed;background:rgba(255,255,255,.1);color:var(--text-muted)}
 
-/* PREMIUM FULL SCREEN LOADING */
 .loading-overlay{
     visibility:hidden;opacity:0;position:fixed;inset:0;
     background:radial-gradient(circle at center, #14141f, #05050a);
@@ -293,7 +259,6 @@ body::before{
 .loading-steps .step-item.active .step-icon{background:var(--gradient-gold);color:#1a1a1a;box-shadow:0 0 20px rgba(245,184,0,0.4)}
 .loading-steps .step-item.done .step-icon{background:var(--gradient-red);color:#fff}
 .loading-steps .step-text{font-size:0.95rem;font-weight:600;color:#fff;font-family:'Plus Jakarta Sans',sans-serif}
-.loading-steps .step-item.active .step-icon i{animation:iconSpin 2s linear infinite}
 
 .loading-bar-wrap{margin-top:32px;width:100%;height:6px;background:rgba(255,255,255,0.05);border-radius:10px;overflow:hidden}
 .loading-bar{height:100%;width:0%;background:var(--gradient-gold);border-radius:10px;transition:width .3s linear;box-shadow:0 0 15px rgba(245,184,0,0.6)}
@@ -318,14 +283,14 @@ body::before{
 
 <header class="header">
     <div class="header-left">
-        <button type="button" class="icon-btn" onclick="history.back()" aria-label="Kembali">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+        <button type="button" class="icon-btn" onclick="window.history.length > 1 ? window.history.back() : location.href='index.html'" aria-label="Kembali">
+            <i class="fa-solid fa-arrow-left"></i>
         </button>
     </div>
-    <div class="logo">DewaTiket</div>
+    <a href="index.html" class="logo"><img src="logo.png" alt="DewaTiket" class="logo-img"></a>
     <div class="header-right">
-        <button type="button" class="icon-btn" aria-label="Bantuan" onclick="showToast('Hubungi WhatsApp: 0895-6271-08538')">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <button type="button" class="icon-btn" aria-label="Bantuan" onclick="showToast('Hubungi WhatsApp: 0812-3456-7890')">
+            <i class="fa-solid fa-circle-question"></i>
         </button>
     </div>
 </header>
@@ -466,9 +431,6 @@ body::before{
 <div class="toast" id="toast"></div>
 
 <script>
-// ═══════════════════════════════════════════════
-// EMAILJS CONFIG
-// ═══════════════════════════════════════════════
 const EMAILJS_CONFIG = {
     SERVICE_ID: 'service_33kbsys',
     TEMPLATE_ID: 'template_pp5t3j7',
@@ -479,26 +441,22 @@ if (typeof emailjs !== 'undefined') {
     emailjs.init({ publicKey: EMAILJS_CONFIG.PUBLIC_KEY });
 }
 
-// ═══════════════════════════════════════════════
-// LOAD ORDER DATA
-// ═══════════════════════════════════════════════
-let order = JSON.parse(localStorage.getItem('protix_order') || '{}');
-
-if (!order.nama) {
-    const urlParams = new URLSearchParams(window.location.search);
-    order.nama = urlParams.get('nama') || '-';
-    order.wa = urlParams.get('wa') || '-';
-    order.total_bayar = parseInt(urlParams.get('total') || '0');
-    order.jumlah_tiket = parseInt(urlParams.get('totalQty') || '0');
-    order.detail_pesanan = [];
+let order = {};
+try {
+    order = JSON.parse(localStorage.getItem('protix_order') || '{}');
+} catch(e) {
+    order = {};
 }
 
 let orderId = localStorage.getItem('orderId') || 'SPECTRA-' + Date.now();
 localStorage.setItem('orderId', orderId);
-document.getElementById('orderId').textContent = orderId;
 
-let totalStr = 'Rp ' + Number(order.total_bayar || 0).toLocaleString('id-ID');
-document.getElementById('total').textContent = totalStr;
+if (!order.nama) {
+    window.location.href = 'index.html';
+}
+
+document.getElementById('orderId').textContent = orderId;
+document.getElementById('total').textContent = 'Rp ' + Number(order.total_bayar || 0).toLocaleString('id-ID');
 
 let tiketText = '-';
 if (order.detail_pesanan && order.detail_pesanan.length > 0) {
@@ -509,7 +467,6 @@ document.getElementById('jumlahTiket').textContent = order.jumlah_tiket || 0;
 document.getElementById('namaPemesan').textContent = order.nama || '-';
 document.getElementById('waPemesan').textContent = order.wa || '-';
 
-// QR Fallback Handler
 const qrisImg = document.getElementById('qrisImg');
 const qrFallback = document.getElementById('qrFallback');
 qrisImg.addEventListener('error', () => {
@@ -517,9 +474,6 @@ qrisImg.addEventListener('error', () => {
     qrFallback.style.display = 'block';
 });
 
-// ═══════════════════════════════════════════════
-// TOAST & COPY AMOUNT
-// ═══════════════════════════════════════════════
 let toastTimer = null;
 function showToast(msg) {
     const t = document.getElementById('toast');
@@ -538,7 +492,6 @@ function copyAmount() {
             showToast('Gagal menyalin. Nominal: Rp ' + amount);
         });
     } else {
-        // Fallback copy
         const textArea = document.createElement("textarea");
         textArea.value = amount;
         textArea.style.position='fixed';textArea.style.left='-999999px';
@@ -550,9 +503,6 @@ function copyAmount() {
     }
 }
 
-// ═══════════════════════════════════════════════
-// TIMER COUNTDOWN (5 minutes = 300 seconds)
-// ═══════════════════════════════════════════════
 let duration = 300; 
 let timerEl = document.getElementById('timer');
 let timerInterval = null;
@@ -571,9 +521,6 @@ function timerRun() {
 timerRun();
 timerInterval = setInterval(timerRun, 1000);
 
-// ═══════════════════════════════════════════════
-// UPLOAD & VALIDATION (CEKBOX + FILE)
-// ═══════════════════════════════════════════════
 let uploaded = false;
 let fileInput = document.getElementById('file');
 let cekInput = document.getElementById('cek');
@@ -608,9 +555,6 @@ fileInput.addEventListener('change', function() {
 });
 cekInput.addEventListener('change', checkButton);
 
-// ═══════════════════════════════════════════════
-// SEND EMAIL NOTIFICATION VIA EMAILJS
-// ═══════════════════════════════════════════════
 async function sendEmailNotification(orderData, orderId) {
     let ticketDetailStr = '';
     if (orderData.detail_pesanan && orderData.detail_pesanan.length > 0) {
@@ -645,6 +589,7 @@ async function sendEmailNotification(orderData, orderId) {
 
     try {
         await emailjs.send(EMAILJS_CONFIG.SERVICE_ID, EMAILJS_CONFIG.TEMPLATE_ID, templateParams);
+        console.log('Email notifikasi terkirim');
         return true;
     } catch (error) {
         console.error('EmailJS Error:', error);
@@ -652,10 +597,7 @@ async function sendEmailNotification(orderData, orderId) {
     }
 }
 
-// ═══════════════════════════════════════════════
-// PREMIUM LOADING (3 minutes = 180000 ms) & REDIRECT
-// ═══════════════════════════════════════════════
-const LOADING_DURATION = 180000; // 3 menit tepat
+const LOADING_DURATION = 180000; 
 const loadingOverlay = document.getElementById('loading');
 const progressCircle = document.getElementById('progressCircle');
 const progressNum = document.getElementById('progressNum');
@@ -663,7 +605,7 @@ const loadingBar = document.getElementById('loadingBar');
 const loadingTime = document.getElementById('loadingTime');
 const loadingSubtitle = document.getElementById('loadingSubtitle');
 
-const CIRCUMFERENCE = 2 * Math.PI * 90; // r=90
+const CIRCUMFERENCE = 2 * Math.PI * 90;
 progressCircle.style.strokeDasharray = CIRCUMFERENCE;
 progressCircle.style.strokeDashoffset = CIRCUMFERENCE;
 
@@ -700,21 +642,17 @@ function startPremiumLoading() {
         const progress = Math.min(elapsed / LOADING_DURATION, 1);
         const percent = Math.floor(progress * 100);
         
-        // Update Progress Circle & Bar
         progressCircle.style.strokeDashoffset = CIRCUMFERENCE * (1 - progress);
         progressNum.textContent = percent;
         loadingBar.style.width = percent + '%';
         
-        // Update Timer Text
         const elapsedSec = Math.floor(elapsed / 1000);
         const totalSec = Math.floor(LOADING_DURATION / 1000);
         loadingTime.textContent = formatTime(elapsedSec) + ' / ' + formatTime(totalSec);
         
-        // Update Subtitle
         const subIdx = Math.min(Math.floor(progress * subtitles.length), subtitles.length - 1);
         loadingSubtitle.textContent = subtitles[subIdx];
         
-        // Update Steps
         const activeStep = Math.min(Math.floor(progress * stepElements.length), stepElements.length - 1);
         stepElements.forEach(function(el, idx) {
             el.classList.remove('active', 'done');
@@ -730,7 +668,6 @@ function startPremiumLoading() {
         if (progress < 1) { 
             requestAnimationFrame(update); 
         } else {
-            // Selesai
             stepElements.forEach(function(el) { 
                 el.classList.remove('active'); 
                 el.classList.add('done'); 
@@ -741,24 +678,18 @@ function startPremiumLoading() {
             loadingBar.style.width = '100%';
             loadingSubtitle.textContent = 'Pembayaran berhasil dikonfirmasi!';
             
-            // Redirect ke pending.html setelah 1.5 detik
             setTimeout(function() { 
                 window.location.href = 'pending.html'; 
             }, 1500);
         }
     }
     
-    // Mulai animasi
     requestAnimationFrame(update);
 }
 
 btn.addEventListener('click', function() {
     if (btn.disabled) return;
-    
-    // Mulai animasi loading 3 menit
     startPremiumLoading();
-    
-    // Trigger EmailJS di background (tanpa await agar tidak mengganggu loading)
     sendEmailNotification(order, orderId);
 });
 
